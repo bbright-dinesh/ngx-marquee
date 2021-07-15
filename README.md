@@ -1,4 +1,4 @@
-# ngx-marquee-observable
+# ngx-marquee
 
 Alternative to HTML marquee tag based on ng-marquee library with support for data synchronization.
 

@@ -1,0 +1,26 @@
+<div class="ngx-marquee" [ngClass]="{
+    'ngx-marquee-direction-left': marqueeDirection.Left === direction,
+    'ngx-marquee-direction-right': marqueeDirection.Right === direction,
+    'ngx-marquee-direction-alternate': marqueeDirection.Alternate === direction,
+    'ngx-marquee-pause-on-hover': pauseOnHover
+    }">
+    <span [ngStyle]="{'animation-duration': duration}">
+        <span class="ticker-control ticker-start" 
+            intersectionObserver
+            [intersectionRoot]="root"
+            [intersectionRootMargin]="rootMargin"
+            [intersectionThreshold]="threshold"
+            [intersectionDebounce]="debounce"
+            (visibilityChange)="onVisibilityChanged($event, 0)"></span>
+        <span class="tickers">
+            <ng-content></ng-content>
+        </span>
+        <span class="ticker-control ticker-end"
+            intersectionObserver
+            [intersectionRoot]="root"
+            [intersectionRootMargin]="rootMargin"
+            [intersectionThreshold]="threshold"
+            [intersectionDebounce]="debounce"
+            (visibilityChange)="onVisibilityChanged($event, 1)"></span>
+    </span>
+</div>

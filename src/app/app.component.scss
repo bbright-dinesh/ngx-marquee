@@ -1,0 +1,26 @@
+/* Ticker */
+.wrapped-ticker ngx-marquee {
+    display: block;
+    width: 100%;
+    background-color: red;
+    font-size: 1.3em;  
+    .ticker-custom {
+      margin-right: 100px;
+      color: white;
+    }
+    .ticker-custom:nth-child(even) {
+      opacity: 0.8;
+    }
+    .ticker-custom:last-child {
+      margin-right: 0;
+    }
+    mark {
+      margin:0;
+      padding:0;
+      border:0;
+      outline:0;
+      font-size:100%;
+      vertical-align:baseline;
+      background-color: transparent;
+    }
+}

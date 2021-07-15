@@ -10,6 +10,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "ngx-marquee": [
+        "dist/ngx-marquee/ngx-marquee",
+        "dist/ngx-marquee"
+      ]
+    },
     "target": "es2015",
     "module": "es2020",
     "lib": [

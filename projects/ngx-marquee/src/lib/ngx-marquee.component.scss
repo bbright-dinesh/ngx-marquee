@@ -1,0 +1,62 @@
+.ngx-marquee {
+  overflow: hidden;
+  text-align: left;
+}
+
+.ngx-marquee.ngx-marquee-pause-on-hover:hover > span {
+  animation-play-state: paused;
+}
+
+.ngx-marquee > span {
+  content: attr(data-marquee);
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: linear infinite;
+}
+
+.ngx-marquee > span {
+  animation-duration: 10s;
+}
+
+.ngx-marquee > span {
+  animation-name: movement-smooth;
+}
+
+.ngx-marquee > span {
+  animation-direction: normal;
+}
+
+.ngx-marquee span.ticker-control {
+  /*visibility: hidden;*/
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  color: transparent;
+  background-color: transparent;
+}
+
+.ngx-marquee.ngx-marquee-direction-left > span, .ngx-marquee.ngx-marquee-direction-normal > span {
+  animation-direction: normal;
+}
+
+.ngx-marquee.ngx-marquee-direction-right > span, .ngx-marquee.ngx-marquee-direction-reverse > span {
+  animation-direction: reverse;
+}
+
+.ngx-marquee.ngx-marquee-direction-alternate > span {
+  animation-direction: alternate;
+}
+
+@keyframes movement-smooth {
+  from {
+      transform: translateX(0%);
+      left: 100%;
+  }
+  to {
+      transform: translateX(-100%);
+      left: 0%;
+  }
+}

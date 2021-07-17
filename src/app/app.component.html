@@ -1,17 +1,76 @@
-<h1>ngx-marquee</h1>
+<h1 style="margin-top:40px;text-align: center;">ngx-marquee</h1>
 
-<ng-template #marqueeContent>
-  <mark class="ticker-custom" *ngFor="let ticker of tickers">
-    {{ ticker }}
-  </mark>
-</ng-template>
-
+<!-- Greetings & Links -->
 <section>
-  
-  <div class="wrapped-ticker">
-    <ngx-marquee>
-      <ng-container *ngTemplateOutlet="marqueeContent"></ng-container>
+
+  <div class="wrap-marquee" style="background-color: #01375a;">
+    <ngx-marquee duration="30s">
+      <mark class="ticker-custom">HELLO WORLD!</mark>
+      <mark class="ticker-custom">I HOPE THIS BE USEFUL FOR YOU DEVELOPMENTS</mark>
+      <mark class="ticker-custom">IT'S FREE!</mark>
+      <mark class="ticker-custom">
+        <a href="https://www.npmjs.com/package/ngx-marquee" target="__blank">VISIT THE API</a>
+      </mark>
+      <mark class="ticker-custom">
+        <a href="https://stackblitz.com/github/nitz333/ngx-marquee_use-cases" target="__blank">GET IDEAS AND USE CASES HERE</a>
+      </mark>
+      <mark class="ticker-custom">
+        <a href="https://paypal.me/nitz333">ANY CONTRIBUTIONS ARE VERY APPRECIATED</a>
+      </mark>
+      <mark class="ticker-custom">THANKS!!!</mark>
     </ngx-marquee>
   </div>
 
+</section>
+
+<!-- What's the difference -->
+<section>
+
+  <h2>... Is it just another marquee library?</h2>
+
+  <ng-template #marqueeContent>
+    <mark class="ticker-custom" *ngFor="let ticker of dynamicTape">
+      {{ ticker }}
+    </mark>
+  </ng-template>
+
+  <div class="wrap-marquee" style="background-color: #88bba8;">
+    <ngx-marquee
+      pauseOnHover="true"
+      [duration]="duration"
+      [(pendingUpdates)]="areThereUpdates"
+      [taskOnUpdateContent]="updateContent"
+      [taskOnUpdateDuration]="updateDuration"
+      >
+      <ng-container *ngTemplateOutlet="marqueeContent"></ng-container>
+    </ngx-marquee>
+  </div>
+  <div class="buttons">
+    <button [disabled]="(areThereUpdates) ? true : false" (click)="areThereUpdates = true">Add message</button>
+  </div>
+
+</section>
+
+<!-- and besides that -->
+<section>
+
+  <h2>How many marquees have you seen that can be controlled?</h2>
+
+  <div class="wrap-marquee" style="background-color: #6f6f6f;">
+    <ngx-marquee #marqueePlayer 
+      direction="right"
+      duration="10s"
+      pauseOnHover="true"
+    >
+      <mark class="ticker-custom">AND OF COURSE <i>restart()</i> TOO</mark>
+      <mark class="ticker-custom"><i>playPause()</i></mark>
+      <mark class="ticker-custom">YOU CAN <i>stop()</i></mark>
+    </ngx-marquee>
+  </div>
+  <div class="buttons">
+    <button (click)="marqueePlayer.restart()">Restart</button>
+    <button (click)="marqueePlayer.stop()">Stop</button>
+    <button (click)="marqueePlayer.playPause()">Play/Pause</button>
+  </div>
+  
 </section>

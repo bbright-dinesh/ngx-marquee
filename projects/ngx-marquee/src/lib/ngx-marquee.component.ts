@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { IntersectionStatus } from './observables/from-intersection-observer';
 
 export enum MarqueeState {
@@ -19,33 +19,36 @@ enum MarqueeDirection {
   styleUrls: ['./ngx-marquee.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NgxMarqueeComponent implements OnInit, AfterViewInit {
+export class NgxMarqueeComponent implements AfterViewInit {
 
-  @Input() autoDuration: boolean;
-  @Input() debounce: number;
   @Input() direction: MarqueeDirection;
   @Input() duration: string;
-  @Input() root: HTMLElement;
-  @Input() rootMargin: string;
   @Input() pauseOnHover: boolean;
   @Input() taskOnUpdateContent: () => void;
   @Input() taskOnUpdateDuration: () => string; // Formato esperado "number[s|ms]"
-  @Input() threshold: number | number[];
   @Input() pendingUpdates: boolean;
   @Output() pendingUpdatesChange: EventEmitter<boolean>;
   @Output() playStateChange: EventEmitter<MarqueeState>;
+  @ViewChild("tape") tape: HTMLElement;
 
-  marqueeDirection = MarqueeDirection;
+  readonly root: HTMLElement;
+  readonly rootMargin: string;
+  readonly threshold: number | number[];
+  readonly debounce: number;
+  readonly marqueeDirection = MarqueeDirection;
   
-  private _cssRoot = '.ngx-marquee > span';
   private _elementMarquee: any;
   private _outerFlags = [false, false];
   private _dataPlayState: MarqueeState; 
 
   constructor( private _renderer: Renderer2 )
   {
+    this.debounce = 0;
+    this.root = undefined;
+    this.rootMargin = '0px';
+    this.threshold = 0;
+    this.duration = '20s';
     this.pauseOnHover = false;
-    this.autoDuration = false;
     this.pendingUpdates = false;
     this.pendingUpdatesChange = new EventEmitter<boolean>();
     this.playStateChange = new EventEmitter<MarqueeState>();
@@ -63,25 +66,15 @@ export class NgxMarqueeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit(): void
+  ngAfterViewInit(): void
   {
-    if (this.autoDuration)
-    {
-      this._calculateDuration();
-    }
-
+    this._elementMarquee = this._renderer.selectRootElement(this.tape, true).nativeElement;
+    this._renderer.setStyle(this._elementMarquee, 'animation-duration', this.duration);
+    this._calculateDuration();
     this._setDataPlayState(MarqueeState.Running);
   }
 
-  ngAfterViewInit(): void
-  {
-    this._elementMarquee = this._renderer.selectRootElement(this._cssRoot, true);
-  }
-
-  ngOnDestroy(): void {
-  }
-
-  playPause(): void
+  public playPause(): void
   {
     if ( this._dataPlayState === null || this._dataPlayState === MarqueeState.Running )
     {
@@ -93,13 +86,13 @@ export class NgxMarqueeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  stop(): void
+  public stop(): void
   {
     this._resetAnimation();
     this._stopElement();
   }
 
-  restart(): void
+  public restart(): void
   {
     this._resetAnimation();
     this._playElement();
@@ -153,12 +146,9 @@ export class NgxMarqueeComponent implements OnInit, AfterViewInit {
 
   private _resetMarquee(): void
   {
-    if (this.autoDuration)
-    {
-      this.stop();
-      this._calculateDuration();
-      this._playElement();
-    }
+    this.stop();
+    this._calculateDuration();
+    this._playElement();
   }
 
   private _calculateDuration(): void

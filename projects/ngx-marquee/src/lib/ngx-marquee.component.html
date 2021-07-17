@@ -4,7 +4,7 @@
     'ngx-marquee-direction-alternate': marqueeDirection.Alternate === direction,
     'ngx-marquee-pause-on-hover': pauseOnHover
     }">
-    <span [ngStyle]="{'animation-duration': duration}">
+    <span #tape>
         <span class="ticker-control ticker-start" 
             intersectionObserver
             [intersectionRoot]="root"

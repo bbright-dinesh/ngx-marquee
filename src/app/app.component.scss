@@ -1,12 +1,29 @@
-/* Ticker */
-.wrapped-ticker ngx-marquee {
-    display: block;
-    width: 100%;
-    background-color: red;
+a {
+  color: #9bdcff;
+}
+i {
+  font-family: Courier New, monospace;
+  font-style: normal;
+  background-color:black;
+  padding:0 10px;
+}
+section {
+  margin:60px 0;
+}
+
+.wrap-marquee { 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  ngx-marquee {
+    flex: 1;
+    width: 1px;
     font-size: 1.3em;  
     .ticker-custom {
       margin-right: 100px;
       color: white;
+      line-height: 60px;
     }
     .ticker-custom:nth-child(even) {
       opacity: 0.8;
@@ -23,4 +40,13 @@
       vertical-align:baseline;
       background-color: transparent;
     }
+  }
+}
+
+.buttons {
+  margin: 10px auto;
+  text-align: center;
+  button {
+    margin: 10px;
+  }
 }

@@ -45,8 +45,8 @@ export class AppModule { }
 ```
 
 # Demo
-* Basic example (...developing)
-* Case of use (...developing)
+* [Basic example](https://stackblitz.com/github/nitz333/ngx-marquee)
+* [Use Cases (advanced examples)](https://stackblitz.com/github/nitz333/ngx-marquee_use-cases)
 
 # API
 
@@ -55,6 +55,10 @@ export class AppModule { }
 ### @Input() direction
 
 `string` Property sets the controlling direction of _marquee_ movement.
+
+**default value:** `"left"`
+
+> **Note:** The `taskOnUpdateContent()` callback function is not fired when `direction` value is _"alternate"_.
 
 #### possible values
 * "left"
@@ -72,6 +76,10 @@ export class AppModule { }
 
 `string` Property sets the length of time that an animation takes to complete one cycle.
 
+**default value:** `"20s"`
+
+> **Note:** The duration string format must be a value preceded by a letter s or ms to denote time in seconds or milliseconds respectively.
+
 ### Example
 ```html
 <ngx-marquee duration="120s">
@@ -83,6 +91,8 @@ export class AppModule { }
 
 `boolean` Property set to pause the _marquee_ movement while hover user event.
 
+**default value:** `false`
+
 ### Example
 
 ```html
@@ -93,7 +103,9 @@ export class AppModule { }
 
 ### @Input() pendingUpdates
 
-`boolean` Property indicates that `taskOnUpdateDuration` or `taskOnUpdateContent`  callbacks functions will be executed when the current movement cycle has been finished.
+`boolean` Property indicates that `taskOnUpdateContent`  callback function will be executed when the current movement cycle has been finished.
+
+**default value:** `false`
 
 ### Example
 
@@ -103,28 +115,19 @@ export class AppModule { }
 </ngx-marquee>
 ```
 
-### @Input() autoDuration
-
-`boolean` Property indicates that the _marquee_ should be dynamically adjusted in its duration when it has changes in its content. The customized `taskOnUpdateDuration` callback function will be used.  
-
-### Example
-
-```html
-<ngx-marquee autoDuration="false">
-  <mark>My ticker text</mark>
-</ngx-marquee>
-```
-
 ### @Input() taskOnUpdateDuration
 
-`function` Customized callback function to be used to determine the new length of time that an animation takes to complete the next cycle. This callback function will be executed while `autoDuration` and `pendingUpdates` properties are both sets on true and the current cycle of _marquee_ movement has been finished.
-> **Note:** The **taskOnUpdateDuration( )** function must to **return a string** value (duration format).
+`function` Customized callback function to be used to determine the new `duration` value that an animation takes to complete the next cycle. This callback function will be executed if `pendingUpdates` property is set on true and the current cycle of _marquee_ movement has been finished.
+
+**return:** `string`
+
+> **Note:** If **taskOnUpdateDuration( )** function is not supplied, the  `duration` value is considered.
 
 #### possible values
 
 ```js
 foo = (): string => {
-  // Some imaginative logic
+  // Some imaginative lines about the new duration of your marquee
   // ...
   return "90ms";
 };
@@ -133,7 +136,7 @@ foo = (): string => {
 ### Example
 
 ```html
-<ngx-marquee [taskOnUpdateDuration]="foo" autoDuration="true" pendingUpdates="true">
+<ngx-marquee [taskOnUpdateDuration]="foo" pendingUpdates="true">
   <mark>My ticker text</mark>
 </ngx-marquee>
 ```
@@ -141,13 +144,16 @@ foo = (): string => {
 ### @Input() taskOnUpdateContent
 
 `function` Customized callback function to be used to set new content in the next cycle. This callback function will be executed while `pendingUpdates` property is set on true and the current cycle of _marquee_ movement has been finished.
-> **Note:** The **taskOnUpdateContent( )** function **does not return value**.
+
+**return:** `void`
+
+> **Note:** If **taskOnUpdateContent( )** function is not supplied, the marquee remains unchanged.
 
 #### possible values
 
 ```js
 anotherFoo = (): void => {
-  // Some imaginative logic
+  // Some imaginative lines about the new content of your marquee
   // ...
 };
 ```

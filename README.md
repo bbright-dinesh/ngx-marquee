@@ -8,7 +8,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # How to install
 
-Run `npm i ng-marquee` to install the library.
+Run `npm i ngx-marquee` to install the library.
 
 ## How to use
 

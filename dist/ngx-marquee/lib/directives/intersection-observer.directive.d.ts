@@ -1,5 +1,6 @@
 import { ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { IntersectionStatus } from '../observables/from-intersection-observer';
+import * as i0 from "@angular/core";
 export declare class IntersectionObserverDirective implements OnInit, OnDestroy {
     private _element;
     intersectionDebounce: number;
@@ -11,4 +12,7 @@ export declare class IntersectionObserverDirective implements OnInit, OnDestroy 
     constructor(_element: ElementRef);
     ngOnInit(): void;
     ngOnDestroy(): void;
+    static ɵfac: i0.ɵɵFactoryDef<IntersectionObserverDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDefWithMeta<IntersectionObserverDirective, "[intersectionObserver]", never, { "intersectionDebounce": "intersectionDebounce"; "intersectionRootMargin": "intersectionRootMargin"; "intersectionRoot": "intersectionRoot"; "intersectionThreshold": "intersectionThreshold"; }, { "visibilityChange": "visibilityChange"; }, never>;
 }
+//# sourceMappingURL=intersection-observer.directive.d.ts.map

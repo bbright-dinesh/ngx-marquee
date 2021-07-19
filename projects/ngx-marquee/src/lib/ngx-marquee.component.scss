@@ -11,18 +11,12 @@
   content: attr(data-marquee);
   display: inline-block;
   position: relative;
-  left: 50%;
   white-space: nowrap;
-  transform: translateX(-50%);
   animation: linear infinite;
 }
 
 .ngx-marquee > span {
-  animation-duration: 10s;
-}
-
-.ngx-marquee > span {
-  animation-name: movement-smooth;
+  animation-duration: 20s;
 }
 
 .ngx-marquee > span {
@@ -42,14 +36,6 @@
   animation-direction: normal;
 }
 
-.ngx-marquee.ngx-marquee-direction-right > span, .ngx-marquee.ngx-marquee-direction-reverse > span {
-  animation-direction: reverse;
-}
-
-.ngx-marquee.ngx-marquee-direction-alternate > span {
-  animation-direction: alternate;
-}
-
 @keyframes movement-smooth {
   from {
       transform: translateX(0%);
@@ -58,5 +44,77 @@
   to {
       transform: translateX(-100%);
       left: 0%;
+  }
+}
+
+@keyframes slide-in-up {
+  0% {
+    transform: translateY(100%);
+    left: 0%;
+  }
+  10% {
+    transform: translateY(0%);
+    left: 0%;
+  }
+  16% {
+    transform: translate(0%,0%);
+  }
+  100% {
+    transform: translateX(-100%);
+    left: 0%;
+  }
+}
+
+@keyframes slide-in-down {
+  0% {
+    transform: translateY(-100%);
+    left: 0%;
+  }
+  10% {
+    transform: translateY(0%);
+    left: 0%;
+  }
+  16% {
+    transform: translate(0%,0%);
+  }
+  100% {
+    transform: translateX(-100%);
+    left: 0%;
+  }
+}
+
+@keyframes slide-in-up-right {
+  0% {
+    transform: translate(-100%, 100%);
+    right: -100%;
+  }
+  10% {
+    transform: translate(-100%, 0%);
+    right: -100%;
+  }
+  16% {
+    transform: translate(-100%,0%);
+  } 
+  100% {
+    transform: translate(0%, 0%);
+    right: -100%;
+  }
+}
+
+@keyframes slide-in-down-right {
+  0% {
+    transform: translate(-100%, -100%);
+    right: -100%;
+  }
+  10% {
+    transform: translate(-100%, 0%);
+    right: -100%;
+  }
+  16% {
+    transform: translate(-100%,0%);
+  } 
+  100% {
+    transform: translate(0%, 0%);
+    right: -100%;
   }
 }

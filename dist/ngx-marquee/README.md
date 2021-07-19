@@ -8,18 +8,29 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 # How to install
 
-Run `npm i ngx-marquee` to install the library.
+Run `npm i ng-marquee` to install the library.
 
 ## How to use
 
 #### Import Module
 
 ```ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgxMarqueeModule } from 'ngx-marquee';
 
+import { AppComponent } from './app.component';
+
 @NgModule({
-  imports: [ NgxMarqueeModule ],
-  ...
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    NgxMarqueeModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 
@@ -36,27 +47,6 @@ export class AppModule { }
 # Demo
 * [Basic example](https://stackblitz.com/github/nitz333/ngx-marquee)
 * [Use Cases (advanced examples)](https://stackblitz.com/github/nitz333/ngx-marquee_use-cases)
-
-## Resume properties
-
-| Name | Type | Description |
-| :--- | :----: | :--- |
-| [direction] | string  | Sets the controlling direction of _marquee_ movement. |
-| [duration] | string | Sets the length of time that an animation takes to complete one cycle. |
-| [pauseOnHover] | boolean | Set to pause the _marquee_ movement while hover user event. |            
-| [animation] | string | Sets animation entrance when the _marquee_ cycle starts. |
-| [pendingUpdates] | boolean | Indicates that `taskOnUpdateContent`  callback function will be executed when the current movement cycle has been finished. |
-| [taskOnUpdateDuration] | function | Callback function to be used to determine the new `duration` value that an animation takes to complete the next cycle. This callback function will be executed if `pendingUpdates` property is set on true and the current cycle of _marquee_ movement has been finished. |
-| [taskOnUpdateContent] | function | Callback function to be used to set new content in the next cycle. This callback function will be executed while `pendingUpdates` property is set on true and the current cycle of _marquee_ movement has been finished. |
-| (pendingUpdatesChange) | boolean | This event indicates that the `taskOnUpdateDuration` or` taskOnUpdateContent` callbacks functions have been executed. |
-| (playStateChange) | MarqueeState | This event indicates the current state movement of the _marquee_. |
-
-### Resume methods
-| Name | Description |
-| :--- | :--- |
-| playPause | Toggle the movement of the _marquee_ to play or pause. |
-| stop | Stop the movement of the _marquee_. |
-| restart | Restart the movement of the _marquee_ to the initial move point. |
 
 # API
 
@@ -107,26 +97,6 @@ export class AppModule { }
 
 ```html
 <ngx-marquee pauseOnHover="true">
-  <mark>My ticker text</mark>
-</ngx-marquee>
-```
-
-### @Input() animation
-
-`string` Property sets animation entrance when the _marquee_ cycle starts.
-
-**default value:** `"default"`
-
-> **Note:** Only _"default"_ animation is available when `direction` value is _"alternate"_.
-
-#### possible values
-* "default"
-* "slideInUp"
-* "slideInDown"
-
-### Example
-```html
-<ngx-marquee animation="slideInUp">
   <mark>My ticker text</mark>
 </ngx-marquee>
 ```

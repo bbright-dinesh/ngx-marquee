@@ -13,6 +13,12 @@ enum MarqueeDirection {
   Alternate = 'alternate'
 }
 
+enum MarqueeAnimation {
+  Default = 'default',
+  SlideInUp = 'slideInUp',
+  SlideInDown = 'slideInDown'
+}
+
 @Component({
   selector: 'ngx-marquee',
   templateUrl: './ngx-marquee.component.html',
@@ -24,6 +30,7 @@ export class NgxMarqueeComponent implements AfterViewInit {
   @Input() direction: MarqueeDirection;
   @Input() duration: string;
   @Input() pauseOnHover: boolean;
+  @Input() animation: MarqueeAnimation;
   @Input() taskOnUpdateContent: () => void;
   @Input() taskOnUpdateDuration: () => string; // Formato esperado "number[s|ms]"
   @Input() pendingUpdates: boolean;
@@ -35,7 +42,6 @@ export class NgxMarqueeComponent implements AfterViewInit {
   readonly rootMargin: string;
   readonly threshold: number | number[];
   readonly debounce: number;
-  readonly marqueeDirection = MarqueeDirection;
   
   private _elementMarquee: any;
   private _outerFlags = [false, false];
@@ -48,6 +54,7 @@ export class NgxMarqueeComponent implements AfterViewInit {
     this.rootMargin = '0px';
     this.threshold = 0;
     this.duration = '20s';
+    this.animation = MarqueeAnimation.Default;
     this.pauseOnHover = false;
     this.pendingUpdates = false;
     this.pendingUpdatesChange = new EventEmitter<boolean>();
@@ -69,9 +76,7 @@ export class NgxMarqueeComponent implements AfterViewInit {
   ngAfterViewInit(): void
   {
     this._elementMarquee = this._renderer.selectRootElement(this.tape, true).nativeElement;
-    this._renderer.setStyle(this._elementMarquee, 'animation-duration', this.duration);
-    this._calculateDuration();
-    this._setDataPlayState(MarqueeState.Running);
+    this._resetMarquee();
   }
 
   public playPause(): void
@@ -193,14 +198,54 @@ export class NgxMarqueeComponent implements AfterViewInit {
     this._renderer.setStyle(this._elementMarquee, 'animation', 'none');
     let fix = this._elementMarquee.offsetWidth; fix = fix;
 
-    this._renderer.setStyle(this._elementMarquee, 'animation', `${this.duration} linear infinite movement-smooth`);
-    this._renderer.setStyle(this._elementMarquee, '-webkit-animation', `${this.duration} linear infinite movement-smooth`);
+    this._renderer.setStyle(this._elementMarquee, 'animation', `${this.duration} linear infinite`);
+    this._renderer.setStyle(this._elementMarquee, '-webkit-animation', `${this.duration} linear infinite`);
+
     switch (this.direction)
     {
-      case 'right': this._renderer.setStyle(this._elementMarquee, 'animation-direction', 'reverse'); break;
       case 'alternate': this._renderer.setStyle(this._elementMarquee, 'animation-direction', 'alternate'); break;
       default: this._renderer.setStyle(this._elementMarquee, 'animation-direction', 'normal'); break;
     }
+
+    if (this.direction !== MarqueeDirection.Alternate)
+    {
+      if (this.direction === undefined || this.direction === MarqueeDirection.Left)
+      {
+        if (this.animation === MarqueeAnimation.SlideInUp)
+        {
+          this._renderer.setStyle(this._elementMarquee, 'animation-name', 'slide-in-up');
+        }
+        else if (this.animation === MarqueeAnimation.SlideInDown)
+        {
+          this._renderer.setStyle(this._elementMarquee, 'animation-name', 'slide-in-down');
+        }
+        else
+        {
+          this._renderer.setStyle(this._elementMarquee, 'animation-name', 'movement-smooth');
+        }
+      }
+      else if (this.direction === MarqueeDirection.Right)
+      {
+        if (this.animation === MarqueeAnimation.SlideInUp)
+        {
+          this._renderer.setStyle(this._elementMarquee, 'animation-name', 'slide-in-up-right');
+        }
+        else if (this.animation === MarqueeAnimation.SlideInDown)
+        {
+          this._renderer.setStyle(this._elementMarquee, 'animation-name', 'slide-in-down-right');
+        }
+        else
+        {
+          this._renderer.setStyle(this._elementMarquee, 'animation-direction', 'reverse');
+          this._renderer.setStyle(this._elementMarquee, 'animation-name', 'movement-smooth');
+        }
+      }
+    }
+    else
+    {
+      this._renderer.setStyle(this._elementMarquee, 'animation-name', 'movement-smooth');
+    }
+
   }
 
   private _setDataAttrState( state: string = '' ): void

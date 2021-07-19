@@ -1,5 +1,6 @@
 /**
  * Generated bundle index. Do not edit.
  */
+/// <amd-module name="ngx-marquee" />
 export * from './public-api';
-export { IntersectionObserverDirective as ɵa } from './lib/directives/intersection-observer.directive';
+//# sourceMappingURL=ngx-marquee.d.ts.map

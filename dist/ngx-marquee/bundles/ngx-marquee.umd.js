@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@angular/common')) :
     typeof define === 'function' && define.amd ? define('ngx-marquee', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@angular/common'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['ngx-marquee'] = {}, global.ng.core, global.rxjs, global.rxjs.operators, global.ng.common));
-}(this, (function (exports, core, rxjs, operators, common) { 'use strict';
+}(this, (function (exports, i0, rxjs, operators, i1) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -385,6 +385,57 @@
         });
     }
 
+    var IntersectionObserverDirective = /** @class */ (function () {
+        function IntersectionObserverDirective(_element) {
+            this._element = _element;
+            this.intersectionDebounce = 0;
+            this.intersectionRootMargin = '0px';
+            this.visibilityChange = new i0.EventEmitter();
+            this._destroy$ = new rxjs.Subject();
+        }
+        IntersectionObserverDirective.prototype.ngOnInit = function () {
+            var _this = this;
+            var element = this._element.nativeElement;
+            var config = {
+                root: this.intersectionRoot,
+                rootMargin: this.intersectionRootMargin,
+                threshold: this.intersectionThreshold
+            };
+            fromIntersectionObserver(element, config, this.intersectionDebounce)
+                .pipe(operators.takeUntil(this._destroy$))
+                .subscribe(function (status) {
+                _this.visibilityChange.emit(status);
+            });
+        };
+        IntersectionObserverDirective.prototype.ngOnDestroy = function () {
+            this._destroy$.next();
+        };
+        return IntersectionObserverDirective;
+    }());
+    IntersectionObserverDirective.ɵfac = function IntersectionObserverDirective_Factory(t) { return new (t || IntersectionObserverDirective)(i0.ɵɵdirectiveInject(i0.ElementRef)); };
+    IntersectionObserverDirective.ɵdir = i0.ɵɵdefineDirective({ type: IntersectionObserverDirective, selectors: [["", "intersectionObserver", ""]], inputs: { intersectionDebounce: "intersectionDebounce", intersectionRootMargin: "intersectionRootMargin", intersectionRoot: "intersectionRoot", intersectionThreshold: "intersectionThreshold" }, outputs: { visibilityChange: "visibilityChange" } });
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(IntersectionObserverDirective, [{
+                type: i0.Directive,
+                args: [{
+                        selector: '[intersectionObserver]'
+                    }]
+            }], function () { return [{ type: i0.ElementRef }]; }, { intersectionDebounce: [{
+                    type: i0.Input
+                }], intersectionRootMargin: [{
+                    type: i0.Input
+                }], intersectionRoot: [{
+                    type: i0.Input
+                }], intersectionThreshold: [{
+                    type: i0.Input
+                }], visibilityChange: [{
+                    type: i0.Output
+                }] });
+    })();
+
+    var _c0 = ["tape"];
+    var _c1 = function (a0) { return { "ngx-marquee-pause-on-hover": a0 }; };
+    var _c2 = ["*"];
     (function (MarqueeState) {
         MarqueeState["Running"] = "running";
         MarqueeState["Paused"] = "paused";
@@ -415,8 +466,8 @@
             this.animation = MarqueeAnimation.Default;
             this.pauseOnHover = false;
             this.pendingUpdates = false;
-            this.pendingUpdatesChange = new core.EventEmitter();
-            this.playStateChange = new core.EventEmitter();
+            this.pendingUpdatesChange = new i0.EventEmitter();
+            this.playStateChange = new i0.EventEmitter();
             if (typeof this.taskOnUpdateContent !== 'function') {
                 this.taskOnUpdateContent = function () { };
             }
@@ -561,92 +612,106 @@
         };
         return NgxMarqueeComponent;
     }());
-    NgxMarqueeComponent.decorators = [
-        { type: core.Component, args: [{
-                    selector: 'ngx-marquee',
-                    template: "<div class=\"ngx-marquee\" [ngClass]=\"{'ngx-marquee-pause-on-hover': pauseOnHover}\">\n    <span #tape>\n        <span class=\"ticker-control ticker-start\" \n            intersectionObserver\n            [intersectionRoot]=\"root\"\n            [intersectionRootMargin]=\"rootMargin\"\n            [intersectionThreshold]=\"threshold\"\n            [intersectionDebounce]=\"debounce\"\n            (visibilityChange)=\"onVisibilityChanged($event, 0)\">L</span>\n        <span class=\"tickers\">\n            <ng-content></ng-content>\n        </span>\n        <span class=\"ticker-control ticker-end\"\n            intersectionObserver\n            [intersectionRoot]=\"root\"\n            [intersectionRootMargin]=\"rootMargin\"\n            [intersectionThreshold]=\"threshold\"\n            [intersectionDebounce]=\"debounce\"\n            (visibilityChange)=\"onVisibilityChanged($event, 1)\">R</span>\n    </span>\n</div>",
-                    changeDetection: core.ChangeDetectionStrategy.OnPush,
-                    styles: [".ngx-marquee{overflow:hidden;text-align:left}.ngx-marquee.ngx-marquee-pause-on-hover:hover>span{animation-play-state:paused}.ngx-marquee>span{content:attr(data-marquee);display:inline-block;position:relative;white-space:nowrap;animation:linear infinite;animation-duration:20s;animation-direction:normal}.ngx-marquee span.ticker-control{display:inline-block;width:20px;text-align:center;color:transparent;background-color:initial}.ngx-marquee.ngx-marquee-direction-left>span,.ngx-marquee.ngx-marquee-direction-normal>span{animation-direction:normal}@keyframes movement-smooth{0%{transform:translateX(0);left:100%}to{transform:translateX(-100%);left:0}}@keyframes slide-in-up{0%{transform:translateY(100%);left:0}10%{transform:translateY(0);left:0}16%{transform:translate(0)}to{transform:translateX(-100%);left:0}}@keyframes slide-in-down{0%{transform:translateY(-100%);left:0}10%{transform:translateY(0);left:0}16%{transform:translate(0)}to{transform:translateX(-100%);left:0}}@keyframes slide-in-up-right{0%{transform:translate(-100%,100%);right:-100%}10%{transform:translate(-100%);right:-100%}16%{transform:translate(-100%)}to{transform:translate(0);right:-100%}}@keyframes slide-in-down-right{0%{transform:translate(-100%,-100%);right:-100%}10%{transform:translate(-100%);right:-100%}16%{transform:translate(-100%)}to{transform:translate(0);right:-100%}}"]
-                },] }
-    ];
-    NgxMarqueeComponent.ctorParameters = function () { return [
-        { type: core.Renderer2 }
-    ]; };
-    NgxMarqueeComponent.propDecorators = {
-        direction: [{ type: core.Input }],
-        duration: [{ type: core.Input }],
-        pauseOnHover: [{ type: core.Input }],
-        animation: [{ type: core.Input }],
-        taskOnUpdateContent: [{ type: core.Input }],
-        taskOnUpdateDuration: [{ type: core.Input }],
-        pendingUpdates: [{ type: core.Input }],
-        pendingUpdatesChange: [{ type: core.Output }],
-        playStateChange: [{ type: core.Output }],
-        tape: [{ type: core.ViewChild, args: ["tape",] }]
-    };
-
-    var IntersectionObserverDirective = /** @class */ (function () {
-        function IntersectionObserverDirective(_element) {
-            this._element = _element;
-            this.intersectionDebounce = 0;
-            this.intersectionRootMargin = '0px';
-            this.visibilityChange = new core.EventEmitter();
-            this._destroy$ = new rxjs.Subject();
-        }
-        IntersectionObserverDirective.prototype.ngOnInit = function () {
-            var _this = this;
-            var element = this._element.nativeElement;
-            var config = {
-                root: this.intersectionRoot,
-                rootMargin: this.intersectionRootMargin,
-                threshold: this.intersectionThreshold
-            };
-            fromIntersectionObserver(element, config, this.intersectionDebounce)
-                .pipe(operators.takeUntil(this._destroy$))
-                .subscribe(function (status) {
-                _this.visibilityChange.emit(status);
-            });
-        };
-        IntersectionObserverDirective.prototype.ngOnDestroy = function () {
-            this._destroy$.next();
-        };
-        return IntersectionObserverDirective;
-    }());
-    IntersectionObserverDirective.decorators = [
-        { type: core.Directive, args: [{
-                    selector: '[intersectionObserver]'
-                },] }
-    ];
-    IntersectionObserverDirective.ctorParameters = function () { return [
-        { type: core.ElementRef }
-    ]; };
-    IntersectionObserverDirective.propDecorators = {
-        intersectionDebounce: [{ type: core.Input }],
-        intersectionRootMargin: [{ type: core.Input }],
-        intersectionRoot: [{ type: core.Input }],
-        intersectionThreshold: [{ type: core.Input }],
-        visibilityChange: [{ type: core.Output }]
-    };
+    NgxMarqueeComponent.ɵfac = function NgxMarqueeComponent_Factory(t) { return new (t || NgxMarqueeComponent)(i0.ɵɵdirectiveInject(i0.Renderer2)); };
+    NgxMarqueeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NgxMarqueeComponent, selectors: [["ngx-marquee"]], viewQuery: function NgxMarqueeComponent_Query(rf, ctx) {
+            if (rf & 1) {
+                i0.ɵɵviewQuery(_c0, 1);
+            }
+            if (rf & 2) {
+                var _t = void 0;
+                i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.tape = _t.first);
+            }
+        }, inputs: { direction: "direction", duration: "duration", pauseOnHover: "pauseOnHover", animation: "animation", taskOnUpdateContent: "taskOnUpdateContent", taskOnUpdateDuration: "taskOnUpdateDuration", pendingUpdates: "pendingUpdates" }, outputs: { pendingUpdatesChange: "pendingUpdatesChange", playStateChange: "playStateChange" }, ngContentSelectors: _c2, decls: 9, vars: 11, consts: [[1, "ngx-marquee", 3, "ngClass"], ["tape", ""], ["intersectionObserver", "", 1, "ticker-control", "ticker-start", 3, "intersectionRoot", "intersectionRootMargin", "intersectionThreshold", "intersectionDebounce", "visibilityChange"], [1, "tickers"], ["intersectionObserver", "", 1, "ticker-control", "ticker-end", 3, "intersectionRoot", "intersectionRootMargin", "intersectionThreshold", "intersectionDebounce", "visibilityChange"]], template: function NgxMarqueeComponent_Template(rf, ctx) {
+            if (rf & 1) {
+                i0.ɵɵprojectionDef();
+                i0.ɵɵelementStart(0, "div", 0);
+                i0.ɵɵelementStart(1, "span", null, 1);
+                i0.ɵɵelementStart(3, "span", 2);
+                i0.ɵɵlistener("visibilityChange", function NgxMarqueeComponent_Template_span_visibilityChange_3_listener($event) { return ctx.onVisibilityChanged($event, 0); });
+                i0.ɵɵtext(4, "L");
+                i0.ɵɵelementEnd();
+                i0.ɵɵelementStart(5, "span", 3);
+                i0.ɵɵprojection(6);
+                i0.ɵɵelementEnd();
+                i0.ɵɵelementStart(7, "span", 4);
+                i0.ɵɵlistener("visibilityChange", function NgxMarqueeComponent_Template_span_visibilityChange_7_listener($event) { return ctx.onVisibilityChanged($event, 1); });
+                i0.ɵɵtext(8, "R");
+                i0.ɵɵelementEnd();
+                i0.ɵɵelementEnd();
+                i0.ɵɵelementEnd();
+            }
+            if (rf & 2) {
+                i0.ɵɵproperty("ngClass", i0.ɵɵpureFunction1(9, _c1, ctx.pauseOnHover));
+                i0.ɵɵadvance(3);
+                i0.ɵɵproperty("intersectionRoot", ctx.root)("intersectionRootMargin", ctx.rootMargin)("intersectionThreshold", ctx.threshold)("intersectionDebounce", ctx.debounce);
+                i0.ɵɵadvance(4);
+                i0.ɵɵproperty("intersectionRoot", ctx.root)("intersectionRootMargin", ctx.rootMargin)("intersectionThreshold", ctx.threshold)("intersectionDebounce", ctx.debounce);
+            }
+        }, directives: [i1.NgClass, IntersectionObserverDirective], styles: [".ngx-marquee[_ngcontent-%COMP%]{overflow:hidden;text-align:left}.ngx-marquee.ngx-marquee-pause-on-hover[_ngcontent-%COMP%]:hover > span[_ngcontent-%COMP%]{animation-play-state:paused}.ngx-marquee[_ngcontent-%COMP%] > span[_ngcontent-%COMP%]{content:attr(data-marquee);display:inline-block;position:relative;white-space:nowrap;animation:linear infinite;animation-duration:20s;animation-direction:normal}.ngx-marquee[_ngcontent-%COMP%]   span.ticker-control[_ngcontent-%COMP%]{display:inline-block;width:20px;text-align:center;color:transparent;background-color:initial}.ngx-marquee.ngx-marquee-direction-left[_ngcontent-%COMP%] > span[_ngcontent-%COMP%], .ngx-marquee.ngx-marquee-direction-normal[_ngcontent-%COMP%] > span[_ngcontent-%COMP%]{animation-direction:normal}@keyframes movement-smooth{0%{transform:translateX(0);left:100%}to{transform:translateX(-100%);left:0}}@keyframes slide-in-up{0%{transform:translateY(100%);left:0}10%{transform:translateY(0);left:0}16%{transform:translate(0)}to{transform:translateX(-100%);left:0}}@keyframes slide-in-down{0%{transform:translateY(-100%);left:0}10%{transform:translateY(0);left:0}16%{transform:translate(0)}to{transform:translateX(-100%);left:0}}@keyframes slide-in-up-right{0%{transform:translate(-100%,100%);right:-100%}10%{transform:translate(-100%);right:-100%}16%{transform:translate(-100%)}to{transform:translate(0);right:-100%}}@keyframes slide-in-down-right{0%{transform:translate(-100%,-100%);right:-100%}10%{transform:translate(-100%);right:-100%}16%{transform:translate(-100%)}to{transform:translate(0);right:-100%}}"], changeDetection: 0 });
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NgxMarqueeComponent, [{
+                type: i0.Component,
+                args: [{
+                        selector: 'ngx-marquee',
+                        templateUrl: './ngx-marquee.component.html',
+                        styleUrls: ['./ngx-marquee.component.scss'],
+                        changeDetection: i0.ChangeDetectionStrategy.OnPush
+                    }]
+            }], function () { return [{ type: i0.Renderer2 }]; }, { direction: [{
+                    type: i0.Input
+                }], duration: [{
+                    type: i0.Input
+                }], pauseOnHover: [{
+                    type: i0.Input
+                }], animation: [{
+                    type: i0.Input
+                }], taskOnUpdateContent: [{
+                    type: i0.Input
+                }], taskOnUpdateDuration: [{
+                    type: i0.Input
+                }], pendingUpdates: [{
+                    type: i0.Input
+                }], pendingUpdatesChange: [{
+                    type: i0.Output
+                }], playStateChange: [{
+                    type: i0.Output
+                }], tape: [{
+                    type: i0.ViewChild,
+                    args: ["tape"]
+                }] });
+    })();
 
     var NgxMarqueeModule = /** @class */ (function () {
         function NgxMarqueeModule() {
         }
         return NgxMarqueeModule;
     }());
-    NgxMarqueeModule.decorators = [
-        { type: core.NgModule, args: [{
-                    declarations: [
-                        NgxMarqueeComponent,
-                        IntersectionObserverDirective
-                    ],
-                    imports: [
-                        common.CommonModule
-                    ],
-                    exports: [
-                        NgxMarqueeComponent
-                    ]
-                },] }
-    ];
+    NgxMarqueeModule.ɵfac = function NgxMarqueeModule_Factory(t) { return new (t || NgxMarqueeModule)(); };
+    NgxMarqueeModule.ɵmod = i0.ɵɵdefineNgModule({ type: NgxMarqueeModule });
+    NgxMarqueeModule.ɵinj = i0.ɵɵdefineInjector({ imports: [[
+                i1.CommonModule
+            ]] });
+    (function () {
+        (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(NgxMarqueeModule, { declarations: [NgxMarqueeComponent,
+                IntersectionObserverDirective], imports: [i1.CommonModule], exports: [NgxMarqueeComponent] });
+    })();
+    (function () {
+        (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(NgxMarqueeModule, [{
+                type: i0.NgModule,
+                args: [{
+                        declarations: [
+                            NgxMarqueeComponent,
+                            IntersectionObserverDirective
+                        ],
+                        imports: [
+                            i1.CommonModule
+                        ],
+                        exports: [
+                            NgxMarqueeComponent
+                        ]
+                    }]
+            }], null, null);
+    })();
 
     /*
      * Public API Surface of ngx-marquee
@@ -658,7 +723,6 @@
 
     exports.NgxMarqueeComponent = NgxMarqueeComponent;
     exports.NgxMarqueeModule = NgxMarqueeModule;
-    exports.ɵa = IntersectionObserverDirective;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

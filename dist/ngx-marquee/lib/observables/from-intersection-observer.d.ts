@@ -5,3 +5,4 @@ export declare enum IntersectionStatus {
     NotVisible = "NotVisible"
 }
 export declare const fromIntersectionObserver: (element: HTMLElement, config: IntersectionObserverInit, debounce?: number) => Observable<IntersectionStatus>;
+//# sourceMappingURL=from-intersection-observer.d.ts.map

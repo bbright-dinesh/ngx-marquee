@@ -1,9 +1,4 @@
-<div class="ngx-marquee" [ngClass]="{
-    'ngx-marquee-direction-left': marqueeDirection.Left === direction,
-    'ngx-marquee-direction-right': marqueeDirection.Right === direction,
-    'ngx-marquee-direction-alternate': marqueeDirection.Alternate === direction,
-    'ngx-marquee-pause-on-hover': pauseOnHover
-    }">
+<div class="ngx-marquee" [ngClass]="{'ngx-marquee-pause-on-hover': pauseOnHover}">
     <span #tape>
         <span class="ticker-control ticker-start" 
             intersectionObserver
@@ -11,7 +6,7 @@
             [intersectionRootMargin]="rootMargin"
             [intersectionThreshold]="threshold"
             [intersectionDebounce]="debounce"
-            (visibilityChange)="onVisibilityChanged($event, 0)"></span>
+            (visibilityChange)="onVisibilityChanged($event, 0)">L</span>
         <span class="tickers">
             <ng-content></ng-content>
         </span>
@@ -21,6 +16,6 @@
             [intersectionRootMargin]="rootMargin"
             [intersectionThreshold]="threshold"
             [intersectionDebounce]="debounce"
-            (visibilityChange)="onVisibilityChanged($event, 1)"></span>
+            (visibilityChange)="onVisibilityChanged($event, 1)">R</span>
     </span>
 </div>

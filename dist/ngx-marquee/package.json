@@ -1,0 +1,51 @@
+{
+  "name": "ngx-marquee",
+  "version": "1.2.0",
+  "description": "Powerful Marquee for Angular (based on observers behavior)",
+  "keywords": [
+    "Angular",
+    "marquee",
+    "tickers",
+    "newsticker",
+    "breakingnews",
+    "ticker",
+    "tickertape",
+    "moving text",
+    "scrolling text",
+    "scrolling ticker",
+    "css marquee",
+    "ngx-marquee",
+    "observable",
+    "listener",
+    "angular 2+",
+    "angular 11"
+  ],
+  "author": {
+    "name": "Eduardo Gonzalez Moreno",
+    "email": "eduardo.nitz333@gmail.com"
+  },
+  "homepage": "https://github.com/nitz333/ngx-marquee#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitz333/ngx-marquee.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nitz333/ngx-marquee/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^11.2.14",
+    "@angular/core": "^11.2.14"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "main": "bundles/ngx-marquee.umd.js",
+  "module": "fesm2015/ngx-marquee.js",
+  "es2015": "fesm2015/ngx-marquee.js",
+  "esm2015": "esm2015/ngx-marquee.js",
+  "fesm2015": "fesm2015/ngx-marquee.js",
+  "typings": "ngx-marquee.d.ts",
+  "metadata": "ngx-marquee.metadata.json",
+  "sideEffects": false
+}

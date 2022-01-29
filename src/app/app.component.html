@@ -17,7 +17,7 @@
 
       <div class="wrap-marquee" style="background-color: #88bba8;">
         <ngx-marquee
-          pauseOnHover="true"
+          [pauseOnHover]="true"
           [duration]="duration"
           [(pendingUpdates)]="areThereUpdates"
           [taskOnUpdateContent]="updateContent"
@@ -37,7 +37,7 @@
 
       <div class="wrap-marquee" style="background-color: #6f6f6f;">
         <ngx-marquee #marqueePlayer 
-          direction="right"
+          [direction]="marqueeDirection.Right"
           duration="12s">
           <mark class="ticker-custom">AND OF COURSE <i>restart()</i> TOO</mark>
           <mark class="ticker-custom"><i>playPause()</i></mark>
@@ -58,7 +58,7 @@
       <div id="logo">ngx-marquee ;)</div>
       <div id="newsticker">
         <div class="wrap-marquee" style="background-color: #01375a;">
-          <ngx-marquee duration="20s" animation="slideInUp" pauseOnHover="true">
+          <ngx-marquee duration="20s" [animation]="marqueeAnimation.SlideInUp" [pauseOnHover]="true">
             <mark class="ticker-custom">HELLO WORLD!</mark>
             <mark class="ticker-custom">I HOPE THIS BE USEFUL FOR YOU DEVELOPMENTS</mark>
             <mark class="ticker-custom">

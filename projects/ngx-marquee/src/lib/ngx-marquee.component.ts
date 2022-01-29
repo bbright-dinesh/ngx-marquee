@@ -7,13 +7,13 @@ export enum MarqueeState {
   Stopped = "stopped"
 }
 
-enum MarqueeDirection {
+export enum MarqueeDirection {
   Left = 'left',
   Right = 'right',
   Alternate = 'alternate'
 }
 
-enum MarqueeAnimation {
+export enum MarqueeAnimation {
   Default = 'default',
   SlideInUp = 'slideInUp',
   SlideInDown = 'slideInDown'

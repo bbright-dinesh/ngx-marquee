@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MarqueeState, MarqueeDirection, MarqueeAnimation } from 'ngx-marquee';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ export class AppComponent implements OnInit{
   areThereUpdates = false;
   duration: string;
   count = 1;
+
+  marqueeDirection = MarqueeDirection;
+  marqueeAnimation = MarqueeAnimation;
 
   ngOnInit(): void
   {

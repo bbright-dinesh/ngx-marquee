@@ -53,8 +53,7 @@ export declare class NgxMarqueeComponent implements AfterViewInit {
     private _resetAnimation;
     private _setDataAttrState;
     private _fixAnimationState;
-    static ɵfac: i0.ɵɵFactoryDef<NgxMarqueeComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDefWithMeta<NgxMarqueeComponent, "ngx-marquee", never, { "direction": "direction"; "duration": "duration"; "pauseOnHover": "pauseOnHover"; "animation": "animation"; "taskOnUpdateContent": "taskOnUpdateContent"; "taskOnUpdateDuration": "taskOnUpdateDuration"; "pendingUpdates": "pendingUpdates"; }, { "pendingUpdatesChange": "pendingUpdatesChange"; "playStateChange": "playStateChange"; }, never, ["*"]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NgxMarqueeComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NgxMarqueeComponent, "ngx-marquee", never, { "direction": "direction"; "duration": "duration"; "pauseOnHover": "pauseOnHover"; "animation": "animation"; "taskOnUpdateContent": "taskOnUpdateContent"; "taskOnUpdateDuration": "taskOnUpdateDuration"; "pendingUpdates": "pendingUpdates"; }, { "pendingUpdatesChange": "pendingUpdatesChange"; "playStateChange": "playStateChange"; }, never, ["*"]>;
 }
 export {};
-//# sourceMappingURL=ngx-marquee.component.d.ts.map

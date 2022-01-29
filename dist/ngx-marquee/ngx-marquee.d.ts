@@ -3,4 +3,3 @@
  */
 /// <amd-module name="ngx-marquee" />
 export * from './public-api';
-//# sourceMappingURL=ngx-marquee.d.ts.map

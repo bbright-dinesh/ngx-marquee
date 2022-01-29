@@ -1,6 +1,0 @@
-/*
- * Public API Surface of ngx-marquee
- */
-export * from './lib/ngx-marquee.component';
-export * from './lib/ngx-marquee.module';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL25neC1tYXJxdWVlL3NyYy9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYyw2QkFBNkIsQ0FBQztBQUM1QyxjQUFjLDBCQUEwQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBuZ3gtbWFycXVlZVxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vbGliL25neC1tYXJxdWVlLmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZ3gtbWFycXVlZS5tb2R1bGUnO1xuIl19

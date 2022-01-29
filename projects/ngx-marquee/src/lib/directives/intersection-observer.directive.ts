@@ -44,7 +44,7 @@ export class IntersectionObserverDirective implements OnInit, OnDestroy {
   
   ngOnDestroy()
   {
-    this._destroy$.next();
+    this._destroy$.next(void 0);
   }
 
 }

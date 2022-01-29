@@ -12,7 +12,6 @@ export declare class IntersectionObserverDirective implements OnInit, OnDestroy 
     constructor(_element: ElementRef);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    static ɵfac: i0.ɵɵFactoryDef<IntersectionObserverDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDefWithMeta<IntersectionObserverDirective, "[intersectionObserver]", never, { "intersectionDebounce": "intersectionDebounce"; "intersectionRootMargin": "intersectionRootMargin"; "intersectionRoot": "intersectionRoot"; "intersectionThreshold": "intersectionThreshold"; }, { "visibilityChange": "visibilityChange"; }, never>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<IntersectionObserverDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<IntersectionObserverDirective, "[intersectionObserver]", never, { "intersectionDebounce": "intersectionDebounce"; "intersectionRootMargin": "intersectionRootMargin"; "intersectionRoot": "intersectionRoot"; "intersectionThreshold": "intersectionThreshold"; }, { "visibilityChange": "visibilityChange"; }, never>;
 }
-//# sourceMappingURL=intersection-observer.directive.d.ts.map
